@@ -1,0 +1,14 @@
+Runs spring boot app
+Supports multiple instances of same app on different ports
+
+To run:
+cd E:\workspace\spring-cloud-workspace\services
+
+# clean build package, run instance on port 9101
+services>scripts\deploy_standalone.bat accountservice 1 clean
+
+# run instance on port 9102
+services>scripts\deploy_standalone.bat accountservice 2
+
+#run instance on port 9103
+services>scripts\deploy_standalone.bat accountservice 3

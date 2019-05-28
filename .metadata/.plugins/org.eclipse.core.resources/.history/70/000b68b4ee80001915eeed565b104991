@@ -1,0 +1,11 @@
+package com.saurabh.demo.spring.service.customerservice.biz;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+@FeignClient(name="accountservice")
+public interface AccountClient {
+	@GetMapping("/{id}")
+	public Response<Account> get(@PathVariable("id") long id);
+}

@@ -1,0 +1,30 @@
+spring:
+   application:
+      name: discoveryservice
+server:
+   port: ${service.port:8761}
+
+# standalone profile used to run a single instance of discover server.
+---    
+spring:
+   profiles: standalone
+eureka:
+   client:
+      registerWithEureka: false
+      fetchRegistry: false
+
+      
+---
+spring:
+   profiles: "ha"
+eureka:
+   instance:
+      hostname: "${discovery.instance.hostname}"
+      metadataMap:
+         zone: zone1
+      preferIpAddress: true
+   client:
+      registerWithEureka: true
+      fetchRegistry: true
+      serviceUrl:
+         defaultZone: "${discovery.fallback.urls}"

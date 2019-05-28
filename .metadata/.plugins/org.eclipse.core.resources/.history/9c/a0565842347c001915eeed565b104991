@@ -1,0 +1,19 @@
+# This doesn't seem to work. Need to set it in the client itself
+#server:
+#   port: ${PORT:8081}
+  
+#management:
+#   endpoints:
+#      web:
+#         exposure:
+            # Needs to be in quotes as asterix has special meaning in yml
+#            include: "*"
+            
+#   endpoint:
+#      shutdown:
+#         enabled: true
+#         sensitive: false
+#      env:
+#         enabled: true
+#         sensitive: false
+

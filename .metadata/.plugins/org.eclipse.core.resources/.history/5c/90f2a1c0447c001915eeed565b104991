@@ -1,0 +1,5 @@
+spring:
+   application:
+      name: discover
+server:
+   port: ${PORT:9100}

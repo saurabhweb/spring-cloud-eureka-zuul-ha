@@ -1,0 +1,14 @@
+Runs spring boot app
+Supports multiple instances of same app on ports (900X) e.g 9001, 9002, 9003
+
+To run:
+cd E:\workspace\spring-cloud-workspace\services
+
+# clean build package, run instance on port 9001
+services>scripts\deploy_standalone.bat gatewayservice 1 clean
+
+# run instance on port 9002
+services>scripts\deploy_standalone.bat gatewayservice 2
+
+#run instance on port 9003
+services>scripts\deploy_standalone.bat gatewayservice 3

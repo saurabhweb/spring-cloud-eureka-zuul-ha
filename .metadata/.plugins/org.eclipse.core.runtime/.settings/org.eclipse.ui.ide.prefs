@@ -1,0 +1,6 @@
+PROBLEMS_FILTERS_MIGRATE=true
+WORKSPACE_NAME=spring-cloud-eureka-zuul-ha
+eclipse.preferences.version=1
+platformState=1555046620550
+quickStart=false
+tipsAndTricks=true

@@ -1,0 +1,23 @@
+server:
+   port: ${service.port:9000}
+   
+zuul:
+   prefix: "/api"
+   routes:
+      account:
+         path: "/account/**"
+         serviceId: accountservice
+      customer:
+         path: "/customer/**"
+         serviceId: customerservice
+      order:
+         path: "/order/**"
+         serviceId: orderservice
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000

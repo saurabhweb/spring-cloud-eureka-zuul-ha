@@ -1,0 +1,5 @@
+
+eureka:
+   client:
+      serviceUrl:
+         defaultZone: "${discovery.service.urls:http://localhost:8761/eureka/}"

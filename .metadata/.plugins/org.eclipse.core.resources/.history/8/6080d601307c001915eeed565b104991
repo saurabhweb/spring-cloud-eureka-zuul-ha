@@ -1,0 +1,81 @@
+package com.saurabh.demo.accountservice.biz;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+/*
+ * Run directly against service instance
+ curl -X POST -H "Content-Type: application/json" \
+-d '{"id":null,"number":"123","balance":100,"customerId":11}' \
+http://localhost:8081
+
+
+# Run against gateway
+curl -X POST -H "Content-Type: application/json" \
+-d '{"id":null,"number":"123","balance":100,"customerId":11}' \
+http://localhost:8001/api/account
+
+# Run against gateway
+curl http://localhost:8001/api/client/1
+
+ */
+@RestController
+public class AccountController {
+
+	@Autowired
+	private AccountRepository accountRepository;
+	
+	@Autowired
+	private CustomerClient customerClient;
+	
+	@Autowired
+	private OrderClient orderClient;
+	
+	@Value("${server.port}")
+	private String port;
+	
+	@GetMapping("/{id}")
+	public Response<Map<String, String>> read(@PathVariable("id") Long id) {
+		Response<Map<String, String>> customer = customerClient.get(1L);
+		Response<Map<String, String>> order = orderClient.get(1L);
+		Account account = new Account("num123", new Random().nextInt(), new Long(new Random().nextInt()));
+		account.setId(new Long(new Random().nextInt()));
+		
+		Map<String, String> retMap = new HashMap<> ();
+		retMap.put("customerInstance", customer.getInstance());
+		retMap.putAll(customer.getBody());
+		retMap.put("orderInstance", order.getInstance());
+		retMap.putAll(order.getBody());
+		retMap.put("accountInstance", port);
+		retMap.put("accountId", new Random().nextInt()+"");
+		return new Response<> (port, retMap);
+	}
+	
+	@PostMapping
+	public Response<Account> create(@RequestBody Account account) {
+		accountRepository.add(account);
+		return new Response<> (port, account);
+	}
+	
+	@PutMapping("/{id}")
+	public Response<Account> update(@PathVariable("id") Long id, @RequestBody Account account) {
+		accountRepository.replace(id, account);
+		return new Response<> (port, accountRepository.get(id));
+	}
+	
+	@DeleteMapping("/{id}")
+	public Response<Account> delete(@PathVariable("id") Long id) {
+		return new Response<> (port, accountRepository.delete(id));
+	}
+}

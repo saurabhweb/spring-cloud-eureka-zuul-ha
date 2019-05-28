@@ -1,0 +1,39 @@
+package com.saurabh.demo.accountservice.biz;
+
+public class Account {
+	private Long id;
+	private String number;
+	private int balance;
+	private Long customerId;
+
+	public Account() {
+
+	}
+	
+	public Account(String number, int balance, Long customerId) {
+		this.number = number;
+		this.balance = balance;
+		this.customerId = customerId;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id=id;
+	}
+	
+	public String getNumber() {
+		return number;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+	
+}

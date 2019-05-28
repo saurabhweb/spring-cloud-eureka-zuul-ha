@@ -1,0 +1,5 @@
+package com.saurabh.demo.spring.configservice;
+
+public class ConfigServerApplication {
+
+}

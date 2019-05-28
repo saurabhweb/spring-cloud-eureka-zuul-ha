@@ -1,0 +1,18 @@
+server:
+   port: ${service.port:8888}
+
+spring:
+   application:
+      name: configservice
+   profiles:
+      active: native
+   cloud:
+      config:
+         server:
+            native:
+               # note: Need to specifiy value with ending '/' otherwise application.yml does not get served.
+               # With this approach, we can define most properties in application.yml
+               # And override for specific services/profiles
+               # Adding 2 locations so that application.yml in config dir also gets served.
+               searchLocations: "classpath:config/, classpath:config/{application}"
+               #searchPaths: "{application}"

@@ -1,0 +1,31 @@
+package com.saurabh.demo.accountservice.biz;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class AccountRepository {
+	
+	private Map<Long, Account> DB = new HashMap<> ();
+	
+	public void add(Account account) {
+		long id = DB.size()+1;
+		account.setId(id);
+		DB.put(id, account);
+	}
+	
+	public Account get(long id) {
+		System.out.println(DB);
+		return DB.get(id);
+	}
+	
+	public void replace(long id, Account account) {
+		DB.put(id, account);
+	}
+	
+	public Account delete(long id) {
+		return DB.remove(id);
+	}
+}

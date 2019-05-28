@@ -1,0 +1,9 @@
+spring:
+   application:
+      name: discoveryservice
+server:
+   port: ${service.port:8761}
+eureka:
+   client:
+      registerWithEureka: false
+      fetchRegistry: false   
